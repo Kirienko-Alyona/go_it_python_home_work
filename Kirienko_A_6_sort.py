@@ -94,6 +94,15 @@ def normalize(file):
     os.rename(file_name_path, new_name_path)    
     return new_name_path   
 
+def start_terminal(path):
+    try:
+        folder_for_scan = Path(sys.argv[1])
+        #print(f'Start in folder {folder_for_scan.resolve()}')
+        main(folder_for_scan.resolve())
+    except IndexError:
+        print(f"Введіть шлях до файлу - змінна path")   
+    return 
+
 #sorted(path)
 known_extensions = delete_dublicate_extensions(list_extensions)
 unknown_extensions = delete_dublicate_extensions(unknown_files)
@@ -101,7 +110,4 @@ print(f"Список відомих розширень файлів: {known_exte
 print(f"Список невідомих розширень файлів: {unknown_extensions}")
 
 if __name__ == '__main__':    # при запуску з терминала виводить пусті списки з розширеннями файлів
-    if sys.argv[1]:
-        folder_for_scan = Path(sys.argv[1])
-        #print(f'Start in folder {folder_for_scan.resolve()}')
-        main(folder_for_scan.resolve())
+    start_terminal(path)
