@@ -41,7 +41,6 @@ def sorted(path: Path):
             sorted_files(rename_element)        
     return
 
-
 def sorted_files(file: Path):      
     file_extension = file.suffix
     file_extension = file_extension.casefold()         
@@ -95,19 +94,27 @@ def normalize(file):
     return new_name_path   
 
 def start_terminal(path):
+    
     try:
+        
         folder_for_scan = Path(sys.argv[1])
-        #print(f'Start in folder {folder_for_scan.resolve()}')
         main(folder_for_scan.resolve())
+        known_extensions = delete_dublicate_extensions(list_extensions)
+        unknown_extensions = delete_dublicate_extensions(unknown_files)
+        print(f"Список відомих розширень файлів: {known_extensions}")
+        print(f"Список невідомих розширень файлів: {unknown_extensions}")
     except IndexError:
-        print(f"Введіть шлях до файлу - змінна path")   
+        print(f"Введіть шлях до папки - змінна path")   
     return 
 
 #sorted(path)
-known_extensions = delete_dublicate_extensions(list_extensions)
-unknown_extensions = delete_dublicate_extensions(unknown_files)
-print(f"Список відомих розширень файлів: {known_extensions}")
-print(f"Список невідомих розширень файлів: {unknown_extensions}")
 
-if __name__ == '__main__':    # при запуску з терминала виводить пусті списки з розширеннями файлів
+# перенесла в функцію start_terminal()
+#known_extensions = delete_dublicate_extensions(list_extensions)
+#unknown_extensions = delete_dublicate_extensions(unknown_files)
+#print(f"Список відомих розширень файлів: {known_extensions}")
+#print(f"Список невідомих розширень файлів: {unknown_extensions}")
+
+if __name__ == '__main__':        
     start_terminal(path)
+    
